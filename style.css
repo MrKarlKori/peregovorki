@@ -1,0 +1,276 @@
+@font-face {
+font-family: 'Yandex Sans Display Thin';
+src: url('Fonts/YandexSans/YandexSansDisplay-Thin.eot');
+src: url('Fonts/YandexSans/YandexSansDisplay-Thin.eot?#iefix') format('embedded-opentype'),
+url('Fonts/YandexSans/YandexSansDisplay-Thin.woff') format('woff'),
+url('Fonts/YandexSans/YandexSansDisplay-Thin.ttf') format('truetype');
+font-weight: normal;
+font-style: normal;
+}
+
+@font-face {
+font-family: 'Yandex Sans Display Light';
+src: url('Fonts/YandexSans/YandexSansDisplay-Light.eot');
+src: url('Fonts/YandexSans/YandexSansDisplay-Light.eot?#iefix') format('embedded-opentype'),
+url('Fonts/YandexSans/YandexSansDisplay-Light.woff') format('woff'),
+url('Fonts/YandexSans/YandexSansDisplay-Light.ttf') format('truetype');
+font-weight: normal;
+font-style: normal;
+}
+
+@font-face {
+font-family: 'Yandex Sans Display Regular';
+src: url('Fonts/YandexSans/YandexSansDisplay-Regular.eot');
+src: url('Fonts/YandexSans/YandexSansDisplay-Regular.eot?#iefix') format('embedded-opentype'),
+url('Fonts/YandexSans/YandexSansDisplay-Regular.woff') format('woff'),
+url('Fonts/YandexSans/YandexSansDisplay-Regular.ttf') format('truetype');
+font-weight: normal;
+font-style: normal;
+}
+
+body {
+	font-family: 'Yandex Sans Display Regular';
+	margin: 0;
+}
+
+h1 {
+	margin: 0;
+}
+
+label, .rooms div:first-child {
+	font-size: 0.8rem;
+	font-weight: 700;
+}
+
+header {
+	height: 70px;
+	border-bottom: 1px rgba(0,0,0,0.1) solid;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 0 25px;
+	font-size: 1.5rem;
+}
+
+header p span {
+	font-family: 'Yandex Sans Display Light';
+}
+
+header p::first-letter {
+	color: red;
+}
+
+.meeting {
+	margin: 50px 16%;
+}
+
+footer {
+	border-top: 1px rgba(0,0,0,0.1) solid;
+	display: flex;
+	justify-content: center;
+	padding: 24px;
+}
+
+.form {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.form-body-left > *, .form-body-right > * {
+	margin-bottom: 40px;
+}
+
+.form-body {
+	display: flex;
+}
+
+.form-body div {
+	width: 480px;
+}
+
+.form-body > div:first-child {
+	margin-right: 30px;
+}
+
+.form-body-right > div:first-child {
+	height: 40px;
+	justify-content: center;
+}
+
+.form-body-right > div:first-child > span {
+	background-color: rgba(80,80,80,0.2);
+	border-radius: 100%;
+	color: rgba(80,80,80,0.6);
+	cursor: pointer;
+	float: right;
+	font-weight: 700;
+	padding: 3px 8px 2px 7px;
+	margin: 7px 0;
+}
+
+.form-body-right > div:first-child > span:hover {
+	background-color: rgba(80,80,80,0.4);
+	color: rgba(80,80,80,0.8);
+}
+
+.input {
+	display: flex;
+	flex-direction: column;
+}
+
+.input__field {
+	border-radius: 3px;
+	border: 2px solid rgba(80,80,80,0.2);
+	height: 30px;
+}
+
+.input__field::placeholder {
+	padding-left: 5px;
+}
+
+.date {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.date div {
+	width: auto;
+}
+
+.input-time {
+	display: flex;
+	flex-direction: column;
+}
+
+.input-time__field {
+	border-radius: 3px;
+	border: 2px solid rgba(80,80,80,0.2);
+	height: 28px;
+	width: 70px;
+}
+
+.date .input {
+	flex-basis: 60%;
+}
+
+.rooms {
+	padding-top: 3px;
+}
+
+.recommended-room {
+	border-radius: 4px;
+	box-sizing: border-box;
+	cursor: pointer;
+	display: flex;
+	font-size: 0.8rem;
+	justify-content: space-between;
+	padding: 8px 10px;
+	margin-bottom: 8px;
+}
+
+.recommended-room--default {
+	background-color: rgba(80,80,80,0.2);
+}
+
+.recommended-room--default:hover {
+	background-color: rgba(80,80,80,0.4);
+}
+
+.recommended-room--clicked {
+	background-color: rgba(0,124,255,1);
+	color: white;
+}
+
+.recommended-room__place {
+	width: 70%;	
+}
+
+.recommended-room__close, .recommended-room__time {
+	font-weight: 700;
+}
+
+.recommended-room--default .recommended-room__close {
+	visibility: hidden;
+}
+
+.persons {
+	margin-left: 10px;
+	margin-top: 10px;
+}
+
+.person {
+	align-items: center;
+	background-color: rgba(80,80,80,0.2);
+	border-bottom-right-radius: 10px;
+	border-top-right-radius: 10px;
+	font-size: 0.8rem;
+	height: 24px;
+	padding-right: 5px;
+	display: inline-flex;
+}
+
+.person__photo {
+	border-radius: 100%;
+	height: 25px;
+	margin-left: -10px;
+	width: 25px;
+}
+
+.person__name {
+	cursor: default;
+	padding: 0 8px;
+}
+
+.person__close {
+	color: rgba(80,80,80,0.6);
+	cursor: pointer;
+	padding-right: 8px;
+}
+
+.person__close:hover {
+	color: rgba(80,80,80,0.8);
+}
+
+.button {
+	border: none;
+	border-radius: 4px;
+	box-sizing: border-box;
+	cursor: pointer;
+	font-weight: 700;
+	padding: 10px 20px;
+}
+
+.button__default {
+	background-color: rgba(80,80,80,0.2);
+	color: black;
+}
+
+.button__create {
+	background-color: rgba(0,124,255,1);
+	color: white;
+}
+
+.dash {
+	font-weight: 700;
+	padding-top: 10px;
+}
+
+.timeline {
+	height: 50px;
+	border-bottom: 1px rgba(0,0,0,0.1) solid;
+}
+
+.conf-rooms {
+	height: calc(100vh - 50px - 70px - 2px);
+}
+
+.timeline, .conf-rooms {
+	display: flex;
+}
+
+.timeline__calendar, .conf-rooms__rooms {
+	border-right: 1px rgba(0,0,0,0.1) solid;
+	width: 18%;
+}
