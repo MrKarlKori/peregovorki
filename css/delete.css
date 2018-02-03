@@ -1,0 +1,107 @@
+*{
+    margin: 0;
+    padding:0;
+}
+body, html {
+    width: 100%;
+    height: 100%;
+}
+
+.delete_meet_window {
+    position: fixed;
+    top: 0;
+    left: 0;
+    min-width: 100%;
+    min-height: 100%;
+    opacity: 0.4;
+    background: rgba(0,16,33,0.40);
+}
+
+
+.create_window {
+    height: 252px;
+}
+.delete_window{
+    height: 228px;
+}
+
+.create_window,
+.delete_window{
+    font-family: HelveticaNeue-Medium;
+    font-size: 13px;
+    width: 444px;
+    position: fixed;
+    color: black;
+    top: 50%;
+    left: 50%;
+    margin-top: -128px;
+    margin-left: -222px;
+    background: #FFFFFF;
+    box-shadow: 0 1px 16px 0 rgba(0,44,92,0.28);
+    border-radius: 8px;
+}
+.create_window p,
+.delete_window p {
+    position: relative;
+    display: block;
+    width: 200px;
+    margin: 88px auto 0;
+    text-align: center;
+    font-size: 20px;
+    letter-spacing: 0;
+    line-height: 24px;
+    font-weight: bold;
+    font-family: HelveticaNeue-Bold;
+}
+
+
+.delete_window p:before{
+    background: url(../img/delete.png) no-repeat;
+}
+.create_window p:before{
+    background: url(../img/create.png) no-repeat;
+}
+.create_window p:before,
+.delete_window p:before{
+    content: '';
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    background-size: cover;
+    left: 50%;
+    margin-left: -20px;
+    top: -56px;
+}
+
+.create_window_buttons,
+.delete_window_buttons{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+
+.create_window_buttons button{
+    background: #007DFF;
+}
+.delete_window_buttons button{
+    background: #E9ECEF;
+}
+
+.create_window_buttons button,
+.delete_window_buttons button{
+    margin: 24px 16px 32px;
+    width: 80px;
+    height: 36px;
+    box-sizing: border-box;
+    outline: none;
+    border: none;
+    border-radius: 4px;
+}
+
+.create_window_data{
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    height: 48px;
+}
