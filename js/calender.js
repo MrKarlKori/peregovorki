@@ -8,61 +8,68 @@
 @param{boolean} date - дата камендаря в формате год/ месяц (из настроек)
 @param{object} page - страницы приложения */
 
-
-/*let calendarBox = document.querySelector('#calendarNew');
-let d = new Calender(calendarBox, true, false, true);
-calendarBox.appendChild(d);*/
-
-
+class A{
+    constructor(){
+    }
+    getDataNow(year,month,day){
+        this.data = year ? new Date(year,month,day) : new Date() ;
+        this.year = this.data.getFullYear() ;
+        this.month = this.data.getMonth();
+        this.day = this.data.getDate();
+    }
+}
 
 let calendarDataPrevButton = document.querySelector('#calendar_data_prev_button');
 let dataNow = document.querySelector('#data_now');
+let calendarNew = document.querySelector('#calendarNew');
 let calendarDataNextButton = document.querySelector('#calendar_data_next_button');
-
-let d = new Date();
-
-let year = d.getFullYear();
-let month = d.getMonth();
-let day = d.getDate();
-
-console.log(year);
-console.log(month);
-console.log(day);
-
-
 let monthNameLarge = ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'];
 let monthNameSlim = ['янв', 'фев', 'мар', 'апр', 'май', 'июн', 'июл', 'авг', 'сен', 'окт', 'ноя', 'дек'];
+let fff = document.querySelector('#calendarNew');
+let dataInCal = new A();
 
-dataNow.innerHTML = d.getDate() + " " + addNameMonth(month, monthNameSlim)  + " " + year + ' - Cегодня';
+dateShow();
+showCalender ();
 
 calendarDataPrevButton.addEventListener('click', ()=>{
-    --day;
-    let g = new Date(year, month, day);
-    dataNow.innerHTML = g.getDate() + " " + addNameMonth(g.getMonth(), monthNameSlim) + " " + g.getFullYear();
+    --dataInCal.day;
+    dateShow(dataInCal.year, dataInCal.month, dataInCal.day);
 });
 
 calendarDataNextButton.addEventListener('click', ()=>{
-    ++day;
-    let g = new Date(year, month, day);
-    dataNow.innerHTML = g.getDate() + " " + addNameMonth(g.getMonth(), monthNameSlim) + " " + g.getFullYear();
+    ++dataInCal.day;
+    dateShow(dataInCal.year, dataInCal.month, dataInCal.day);
 });
 
-let fff = document.querySelector('#calendarNew');
+
+dataNow.addEventListener('click',()=>{
+
+    calendarNew.classList.toggle("show_none")
+});
+
 fff.addEventListener('click', (ev)=>{
 
     if( ev.target.tagName !== 'TD') return;
     if( ev.target.textContent === '') return;
 
-    console.log(ev.target.parentNode.parentNode.parentNode);
     let a = ev.target.parentNode.parentNode.parentNode;
-    console.log(a.querySelector('h2').innerText);
+    let b = a.querySelector('h2').innerText.split(' ');
 
-    day = ev.target.textContent;
-    let g = new Date(year, month, day);
-    dataNow.innerHTML = g.getDate() + " " + addNameMonth(g.getMonth(), monthNameSlim) + " " + g.getFullYear();
+    monthNameLarge.forEach((month, i)=>{
+        if(month === b[0]){
+            dateShow(b[1], i, ev.target.textContent);
+        }
+    });
 });
 
-showCalender ();
+
+
+
+
+function dateShow(year,month,day) {
+    dataInCal.getDataNow(year,month,day);
+    dataNow.innerHTML = '<p>' + dataInCal.day + " " + addNameMonth(dataInCal.month, monthNameSlim)  + " " + dataInCal.year + '</p>'
+}
 
 function showCalender () {
     let createCalenderScript = document.querySelector('#calendarNew');
