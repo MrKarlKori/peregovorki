@@ -5,6 +5,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
+
+
+	<script src="https://cdn.anychart.com/releases/8.1.0/js/anychart-base.min.js" type="text/javascript"></script>
+
 	<title>Переговорки</title>
 
     <link href="css/calender.css" rel="stylesheet">
@@ -21,10 +25,10 @@
 			<div class="timeline__calendar">
 				<div class="calendar_data">
     			<button type="button" id="calendar_data_prev_button"> < </button>
-    			<div id="data_now">текущая дата</div>
+    			<div id="data_now" class="data_now">текущая дата</div>
     			<button type="button" id="calendar_data_next_button"> > </button>
 			</div>
-			<div style="display: none" id="calendarNew" class="calendarNew"> </div>
+			<div id="calendarNew" class="calendarNew"> </div>
 			</div>
 			<div class="timeline__time"></div>
 		</div>
@@ -55,6 +59,27 @@
 				</div>
 			</div>
 		</div>
+		<div id="container" style="height: 400px;"></div>
+		<script>
+            anychart.onDocumentLoad(function () {
+                // create an instance of a pie chart
+                var chart = anychart.pie();
+                // set the data
+                chart.data([
+                    ["Chocolate", 5],
+                    ["Rhubarb compote", 2],
+                    ["Crêpe Suzette", 2],
+                    ["American blueberry", 2],
+                    ["Buttermilk", 1]
+                ]);
+                // set chart title
+                chart.title("Top 5 pancake fillings");
+                // set the container element
+                chart.container("container");
+                // initiate chart display
+                chart.draw();
+            });
+		</script>
 	</main>
 
 <script src="js/delete.js"></script>
