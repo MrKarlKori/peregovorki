@@ -13,10 +13,10 @@
 <body>
 	<header>
 		<p>Яндекс <span>Переговорки</span></p>
-		<button class="button button__create">Создать встречу</button>
+		<button class="button button__create" onclick="createMeeting()">Создать встречу</button>
 	</header>
 
-	<main>
+	<main class="main">
 		<div class="timeline">
 			<div class="timeline__calendar">
 				<div class="calendar_data">
@@ -40,12 +40,92 @@
 							3-6 человек
 						</div>
 					</div>
-					<div class="room__time"></div>
+					<div class="room__time"><button class="button__plus" onclick="createMeeting()">+</button></div>
 				</div>
 				<div class="floor__room">
 					<div class="room__name">
 						<div class="room-name__person">
 							Прачечная
+						</div>
+						<div class="room-name__count">
+							До 10 человек
+						</div>
+					</div>
+					<div class="room__time"></div>
+				</div>
+				<div class="floor__room">
+					<div class="room__name">
+						<div class="room-name__person">
+							Жёлтый дом
+						</div>
+						<div class="room-name__count">
+							до 10 человек
+						</div>
+					</div>
+					<div class="room__time"></div>
+				</div>
+				<div class="floor__room">
+					<div class="room__name">
+						<div class="room-name__person">
+							Оранжевый тюльпан
+						</div>
+						<div class="room-name__count">
+							до 10 человек
+						</div>
+					</div>
+					<div class="room__time"></div>
+				</div>
+			</div>
+			<div class="floor">
+				<span>6 этаж</span>
+				<div class="floor__room">
+					<div class="room__name">
+						<div class="room-name__person">
+							Джокер
+						</div>
+						<div class="room-name__count">
+							3-6 человек
+						</div>
+					</div>
+					<div class="room__time"></div>
+				</div>
+				<div class="floor__room">
+					<div class="room__name">
+						<div class="room-name__person">
+							Мариванна
+						</div>
+						<div class="room-name__count">
+							3-6 человек
+						</div>
+					</div>
+					<div class="room__time"></div>
+				</div>
+				<div class="floor__room">
+					<div class="room__name">
+						<div class="room-name__person">
+							Тонкий Боб
+						</div>
+						<div class="room-name__count">
+							3-6 человек
+						</div>
+					</div>
+					<div class="room__time"></div>
+				</div>
+				<div class="floor__room">
+					<div class="room__name">
+						<div class="room-name__person">
+							Чёрная вдова
+						</div>
+						<div class="room-name__count">
+							3-6 человек
+						</div>
+					</div>
+					<div class="room__time"></div>
+				</div>
+				<div class="floor__room">
+					<div class="room__name">
+						<div class="room-name__person">
+							Белорусский ликёр
 						</div>
 						<div class="room-name__count">
 							3-6 человек
@@ -57,7 +137,65 @@
 		</div>
 	</main>
 
+	<main class="meeting" style="display: none">
+		<form action="" class="form">
+			<div class="form-body">
+				<div class="form-body-left">
+					<h1>Новая встреча</h1>
+					<div class="input">
+						<label for="">Тема</label>
+						<input type="text" class="input__field" placeholder="О чём будем говорить?">
+					</div>
+					<div class="input">
+						<label for="">Участники</label>
+						<input type="text" class="input__field" placeholder="Например, Тор Одинович">
+						<div class="persons">
+							<span class="person">
+								<img src="img/vader.jpg" alt="photo of person" class="person__photo">
+								<span class="person__name">Дарт Вейдер</span>
+								<span class="person__close">X</span>
+							</span>
+					</div>
+					</div>
+				</div>
+				<div class="form-body-right">
+					<div><span>X</span></div>
+					<div class="date">
+						<div class="input">
+							<label for="">Дата</label>
+							<input type="date" class="input__field">
+						</div>
+						<div class="input-time">
+							<label for="">Начало</label>
+							<input type="text" class="input-time__field">
+						</div>
+						<div class="dash">-</div>
+						<div class="input-time">
+							<label for="">Конец</label>
+							<input type="text" class="input-time__field">
+						</div>
+					</div>
+					<div class="rooms">
+						<div>Рекомендованные переговорки:</div>
+						<div class="recommended-room recommended-room--default"><span class="recommended-room__time">16:00-16:30</span><span class="recommended-room__place">Готэм * 4 этаж</span><span class="recommended-room__close">x</span></div>
+						<div class="recommended-room recommended-room--default"><span class="recommended-room__time">16:00-16:30</span><span class="recommended-room__place">Поле непаханное * 4 этаж</span><span class="recommended-room__close">x</span></div>
+						<div class="recommended-room recommended-room--default"><span class="recommended-room__time">16:00-16:30</span><span class="recommended-room__place">Тёмная башня * 4 этаж</span><span class="recommended-room__close">x</span></div>
+					</div>
+				</div>
+			</div>
+
+		</form>
+	</main>
+
+	<footer style="display: none">
+		<div class="form-buttons">
+			<button class="button button__default" onclick="openMain()">Отмена</button>
+			<button class="button button__create" onclick="openMain()">Создать встречу</button>
+		</div>
+	</footer>
+
 <script src="js/delete.js"></script>
 <script src="js/calender.js"></script>
+<script src="js/script.js"></script>
 </body>
 </html>
