@@ -270,7 +270,30 @@ footer {
 	display: flex;
 }
 
-.timeline__calendar, .conf-rooms__rooms {
+.timeline__calendar {
 	border-right: 1px rgba(0,0,0,0.1) solid;
 	width: 18%;
+}
+
+.conf__rooms, .rooms, .room__name {
+	display: flex;
+	flex-direction: column;
+}
+
+.floor__room {
+	display: flex;
+	flex-direction: row;
+}
+
+.room__name {
+	width: 245px;
+	background-color: gray;
+	height: 44px;
+}
+
+.room__time {
+	width: calc(100vw - 260px);
+	background-color: red;
+	height: 28px;
+	margin: 8px 0;
 }

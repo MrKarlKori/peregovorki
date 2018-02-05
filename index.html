@@ -7,6 +7,7 @@
 
 	<title>Переговорки</title>
 
+    <link href="css/calender.css" rel="stylesheet">
 	<link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -17,14 +18,46 @@
 
 	<main>
 		<div class="timeline">
-			<div class="timeline__calendar"></div>
+			<div class="timeline__calendar">
+				<div class="calendar_data">
+    			<button type="button" id="calendar_data_prev_button"> < </button>
+    			<div id="data_now">текущая дата</div>
+    			<button type="button" id="calendar_data_next_button"> > </button>
+			</div>
+			<div style="display: none" id="calendarNew" class="calendarNew"> </div>
+			</div>
 			<div class="timeline__time"></div>
 		</div>
 		<div class="conf-rooms">
-			<div class="conf-rooms__rooms"></div>
-			<div class="conf-rooms__time"></div>
+			<div class="floor">
+				<span>7 этаж</span>
+				<div class="floor__room">
+					<div class="room__name">
+						<div class="room-name__person">
+							Ржавый Фред
+						</div>
+						<div class="room-name__count">
+							3-6 человек
+						</div>
+					</div>
+					<div class="room__time"></div>
+				</div>
+				<div class="floor__room">
+					<div class="room__name">
+						<div class="room-name__person">
+							Прачечная
+						</div>
+						<div class="room-name__count">
+							3-6 человек
+						</div>
+					</div>
+					<div class="room__time"></div>
+				</div>
+			</div>
 		</div>
 	</main>
 
+<script src="js/delete.js"></script>
+<script src="js/calender.js"></script>
 </body>
 </html>
