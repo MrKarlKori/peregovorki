@@ -11,38 +11,56 @@ deleteMeetButton.addEventListener('click', ()=>{
     openMain()
 });
 
-
-
-
-const minute = a.clientWidth / 1440;
+const minute = a.clientWidth / 960;
 
 let room = [];
 
 window.onload = function() {
-	createFirstTime('first');
+	createPlusButtons();
+
+	createFirstTimes();
+
+	createBackground();
 };
 
 let timer = setInterval(createFirstTime, 30000);
 
-function createFirstTime(t) {
-	let div = document.createElement("div");
-	time = minute * getMinutes();
-	div.style = 'height: 28px; display: inline-block; background-color: purple; width: ' + time + 'px';
-	div.textContent = Math.round(time);
+function createFirstTimes() {
+	let divs = document.querySelectorAll('.room__time');
 
-	if ( t === 'first' ) {
-		a.insertBefore(div, a.children[0]) || a.appendChild(div);
-	} else {
-		a.children[0].replaceWith(div);
+	for ( let i = 0; i < divs.length; i++ ) {
+		createFirstTime(divs[i], 'first');
 	}
 }
 
-a.addEventListener('click', createMeetingInRoom);
+function createFirstTime(parent, t) {
+	let div = document.createElement("div");
+	time = minute * getMinutes();
+	div.style = 'height: 28px; display: inline-block; background-color: #D4DDE8; width: ' + time + 'px';
 
+	if ( t === 'first' ) {
+		parent.insertBefore(div, parent.children[0]) || parent.appendChild(div);
+	} else {
+		parent.children[0].replaceWith(div);
+	}
 
+	parent.addEventListener('click', createMeetingInRoom);
+	parent.addEventListener('mouseover', hover);
+	parent.addEventListener('mouseout', hoverOut);
+}
 
+function createBackground() {
+	let div = document.createElement('div');
+	div.style = 'position: absolute; height: 100%; width: 244px; border-right: 1px rgba(0,0,0,0.1) solid; top: 122px; background-color: #fff;';
+	document.querySelector('.conf-rooms').appendChild(div);
+}
 
-
+function createPlusButtons() {
+	let divs = document.querySelectorAll('.room__time');
+	for ( let i = 0; i < divs.length; i++ ) {
+		divs[i].innerHTML = '<button class="button__plus" onclick="createMeeting()" onmouseout="hoverOut()">+</button>';
+	}
+}
 
 function createMeeting(e) {
 	document.querySelector('.main').style.display = 'none';
@@ -66,22 +84,21 @@ function createMeetingInRoom(e) {
 	createMeeting();
 }
 
-a.addEventListener('mouseover', hover);
-a.addEventListener('mouseout', hoverOut);
-document.querySelector('.button__plus').addEventListener('mouseout', hoverOut);
-
 function hover(e) {
 	if ( checkFreeTime(e) ) {
 		return;
 	}
-	document.querySelector('.button__plus').style.display = 'block';
+	e.toElement.children[1].style.display = 'block';
 }
 
 function hoverOut(e) {
 	if ( e.toElement.tagName === 'BUTTON' ) {
 		return;
 	}
-	document.querySelector('.button__plus').style.display = 'none';	
+	if ( e.fromElement.tagName === 'BUTTON' ) {
+		e.fromElement.style.display = 'none';
+	}
+	console.log(e);
 }
 
 function checkFreeTime(e) {
@@ -100,7 +117,8 @@ function createDiv(n) {
 
 function getMinutes() {
 	let date = new Date();
-	return date.getHours() * 60 + date.getMinutes();
+	console.log(date.getHours());
+	return date.getHours() * 60 + date.getMinutes() - 453;
 }
 
 

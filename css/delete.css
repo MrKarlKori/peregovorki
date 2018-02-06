@@ -98,6 +98,9 @@ body, html {
     outline: none;
     border: none;
     border-radius: 4px;
+    color: white;
+    font-weight: 700;
+    cursor: pointer;
 }
 
 .create_window_data{
