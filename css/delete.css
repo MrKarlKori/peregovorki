@@ -15,6 +15,7 @@ body, html {
     min-height: 100%;
     opacity: 0.4;
     background: rgba(0,16,33,0.40);
+    z-index: 1;
 }
 
 
@@ -27,7 +28,6 @@ body, html {
 
 .create_window,
 .delete_window{
-    font-family: HelveticaNeue-Medium;
     font-size: 13px;
     width: 444px;
     position: fixed;
@@ -39,6 +39,7 @@ body, html {
     background: #FFFFFF;
     box-shadow: 0 1px 16px 0 rgba(0,44,92,0.28);
     border-radius: 8px;
+    z-index: 1;
 }
 .create_window p,
 .delete_window p {
