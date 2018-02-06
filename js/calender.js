@@ -204,22 +204,33 @@ class SliderTimeNow {
         this.hour = this.date.getHours();
         this.minute = this.date.getMinutes();
         el.innerHTML = this.hour + ':' + this.minute;
-        let left = (this.hour * 60 + this.minute - 480) * 0.111;
+
+        let HOUR = 60; //minute
+        let EIGHT = 480; //minute
+        let COEFFICIENT = 0.103; //из пропорции 100% - ((100%/16)/2) - 900min ; x% - 1min
+        let COEFFICIENT1 = 0.8; // на глаз т.к. блок div с временем дает смещение
+
+        let left = (this.hour * HOUR + this.minute - EIGHT) * COEFFICIENT;
+
         el.style.display = 'block';
-        el.style.left = left + "%";
+
+        el.style.left = left + (100/16)/2 - COEFFICIENT1  + "%";
+
+        let arrT = document.querySelectorAll('.timeline__hour');
+        [].forEach.call(arrT, (el)=>{
+            let a = el.textContent.split(':').splice(0,1).join();
+            console.log(a);
+            if(this.hour < a){
+                el.style.color = '#252525';
+            }
+        });
     }
 
     getTimeNow(elem){
         let el = document.querySelector(elem);
 
-        let arrT = document.querySelectorAll('.timeline__hour');
-        [].forEach.call(arrT, (el)=>{
-           let a = el.textContent.split(':').splice(0,1).join();
 
-           if(this.hour < a){
-               el.style.color = '#252525';
-           }
-        });
+
 
 
         if( this.hour >= 8 && this.hour <= 23 ){
