@@ -257,16 +257,26 @@ footer {
 	padding-top: 10px;
 }
 
+.floor {
+	padding-top: 20px;
+}
+
+.floor > span {
+	font-weight: 700;
+	padding-left: 25px;
+}
+
 .timeline {
 	height: 50px;
 	border-bottom: 1px rgba(0,0,0,0.1) solid;
 }
 
 .conf-rooms {
+	background-color: #F6F6F9;
 	height: calc(100vh - 50px - 70px - 2px);
 }
 
-.timeline, .conf-rooms {
+.timeline {
 	display: flex;
 }
 
@@ -283,17 +293,36 @@ footer {
 .floor__room {
 	display: flex;
 	flex-direction: row;
+	margin: 10px 0;
 }
 
 .room__name {
-	width: 245px;
-	background-color: gray;
+	width: 220px;
+	background-color: #FFFFFF;
 	height: 44px;
+	padding-left: 25px;
+}
+
+.room-name__person {
+	font-weight: 700;
 }
 
 .room__time {
-	width: calc(100vw - 260px);
+	width: calc(100vw - 245px);
 	background-color: red;
 	height: 28px;
 	margin: 8px 0;
+	display: inline-flex;
+}
+
+.button__plus {
+	display: none;
+	width: 55px;
+	height: 28px;
+	background-color: rgba(0,124,255,1);
+	color: white;
+	font-size: 1.5rem;
+	border: none;
+	border-radius: 3px;
+	cursor: pointer;
 }
