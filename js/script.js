@@ -1,12 +1,15 @@
 let a = document.querySelector(".room__time");
 let buttonDefault = document.querySelector(".create_meet_button");
+let deleteMeetButton = document.querySelector(".delete_meet_button");
 
 buttonDefault.addEventListener('click', ()=>{
     openMain();
     createMeet( createWindow() );
-	/*openMain()*/
 });
 
+deleteMeetButton.addEventListener('click', ()=>{
+    openMain()
+});
 
 
 

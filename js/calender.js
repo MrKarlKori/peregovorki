@@ -8,7 +8,66 @@
 @param{boolean} date - дата камендаря в формате год/ месяц (из настроек)
 @param{object} page - страницы приложения */
 
-class A{
+
+/*ползунок с текущим временем*/
+class SliderTimeNow {
+    constructor(){
+        this.date = new Date();
+        this.hour = this.date.getHours();
+        this.minute = this.date.getMinutes();
+    }
+    showTime(el){
+        this.date = new Date();
+        this.hour = this.date.getHours();
+        this.minute = this.date.getMinutes();
+        el.innerHTML = this.hour + ':' + this.minute;
+        let HOUR = 60; //minute
+        let EIGHT = 480; //minute
+        let COEFFICIENT = 0.103; //из пропорции 100% - ((100%/16)/2) - 900min ; x% - 1min
+        let COEFFICIENT1 = 0.8; // на глаз т.к. блок div с временем дает смещение
+        let left = (this.hour * HOUR + this.minute - EIGHT) * COEFFICIENT;
+        el.style.left = left + (100/16)/2 - COEFFICIENT1  + "%";
+        let arrT = document.querySelectorAll('.timeline__hour');
+        [].forEach.call(arrT, (el)=>{
+            let a = el.textContent.split(':').splice(0,1).join();
+
+            if(this.hour < a){
+                el.style.color = '#252525';
+            }
+        });
+
+    }
+    deleteTimeSlider(elem){
+        let el = document.querySelector(elem);
+
+        if(el){
+            el.parentNode.removeChild(el)
+        }
+
+    }
+    getTimeNow(elem){
+        let el = document.querySelector(elem);
+        if( this.hour >= 8 && this.hour <= 23 ){
+            this.showTime(el);
+
+            setInterval(()=>{
+                this.showTime(el);
+            }, 500) // обновление через каждую минуту
+
+        } else {
+            el.style.display = 'none';
+        }
+    }
+    static createTimeBox(){
+        let box = document.createElement('div');
+        box.className = 'time_box';
+        box.id = 'timeBox';
+        return box;
+    }
+}
+
+//текущая дата
+class GetDataNow{
     constructor(){
     }
     getDataNow(year,month,day){
@@ -19,21 +78,34 @@ class A{
     }
 }
 
+//переменные
 let calendarDataPrevButton = document.querySelector('#calendar_data_prev_button');
 let dataNow = document.querySelector('#data_now');
 let calendarNew = document.querySelector('#calendarNew');
 let calendarDataNextButton = document.querySelector('#calendar_data_next_button');
 let monthNameLarge = ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'];
 let monthNameSlim = ['янв', 'фев', 'мар', 'апр', 'май', 'июн', 'июл', 'авг', 'сен', 'окт', 'ноя', 'дек'];
-let fff = document.querySelector('#calendarNew');
-let dataInCal = new A();
+let timeNow = new SliderTimeNow();
+let timeSliderBox = document.querySelector("#timeSliderBox");
+let dataInCal = new GetDataNow();
 
+
+
+//отображение текущей даты
 dateShow();
+
+//отображение календаря
 showCalender ();
+
+if( dataInCal.year + ' ' + dataInCal.month + ' ' + dataInCal.day !==  new Date().getFullYear() + ' ' + new Date().getMonth() + ' ' + new Date().getDate()){
+    timeSliderBox.appendChild( SliderTimeNow.createTimeBox() );
+    timeNow.getTimeNow('#timeBox');
+}
 
 calendarDataPrevButton.addEventListener('click', ()=>{
     --dataInCal.day;
     dateShow(dataInCal.year, dataInCal.month, dataInCal.day);
+
 });
 
 calendarDataNextButton.addEventListener('click', ()=>{
@@ -41,13 +113,12 @@ calendarDataNextButton.addEventListener('click', ()=>{
     dateShow(dataInCal.year, dataInCal.month, dataInCal.day);
 });
 
-
 dataNow.addEventListener('click',()=>{
     calendarNew.classList.toggle("show_none");
     dataNow.classList.toggle("data_now_active");
 });
 
-fff.addEventListener('click', (ev)=>{
+calendarNew.addEventListener('click', (ev)=>{
 
     if( ev.target.tagName !== 'TD') return;
     if( ev.target.textContent === '') return;
@@ -62,15 +133,20 @@ fff.addEventListener('click', (ev)=>{
     });
 });
 
-
-
-
-
+//функция для отображения текущей даты
 function dateShow(year,month,day) {
     dataInCal.getDataNow(year,month,day);
-    dataNow.innerHTML = '<p>' + dataInCal.day + " " + addNameMonth(dataInCal.month, monthNameSlim)  + " " + dataInCal.year + '</p>'
+    dataNow.innerHTML = '<p>' + dataInCal.day + " " + addNameMonth(dataInCal.month, monthNameSlim)  + " " + dataInCal.year + '</p>';
+
+    if( dataInCal.year + ' ' + dataInCal.month + ' ' + dataInCal.day !==  new Date().getFullYear() + ' ' + new Date().getMonth() + ' ' + new Date().getDate()){
+        timeNow.deleteTimeSlider('#timeBox');
+    } else {
+        timeSliderBox.appendChild( SliderTimeNow.createTimeBox() );
+        timeNow.getTimeNow('#timeBox');
+    }
 }
 
+//функция отображения календаря
 function showCalender () {
     let createCalenderScript = document.querySelector('#calendarNew');
     let idForCalender = 'preview';
@@ -86,6 +162,7 @@ function showCalender () {
     })
 }
 
+//конструктор календаря
 function Calender ( {el} ) {
     let dateInCalender = new Date();
     let year = dateInCalender.getFullYear();
@@ -191,71 +268,6 @@ function createElementFunc (parentElId, nameElem, classNameEl, idNameEl) {
     return document.querySelector(parentElId).appendChild(newElement);
 }
 
-/*ползунок с текущим временем*/
-class SliderTimeNow {
-    constructor(){
-        this.date = new Date();
-        this.hour = this.date.getHours();
-        this.minute = this.date.getMinutes();
-    }
-
-    showTime(el){
-        this.date = new Date();
-        this.hour = this.date.getHours();
-        this.minute = this.date.getMinutes();
-        el.innerHTML = this.hour + ':' + this.minute;
-
-        let HOUR = 60; //minute
-        let EIGHT = 480; //minute
-        let COEFFICIENT = 0.103; //из пропорции 100% - ((100%/16)/2) - 900min ; x% - 1min
-        let COEFFICIENT1 = 0.8; // на глаз т.к. блок div с временем дает смещение
-
-        let left = (this.hour * HOUR + this.minute - EIGHT) * COEFFICIENT;
-
-        el.style.display = 'block';
-
-        el.style.left = left + (100/16)/2 - COEFFICIENT1  + "%";
-
-        let arrT = document.querySelectorAll('.timeline__hour');
-        [].forEach.call(arrT, (el)=>{
-            let a = el.textContent.split(':').splice(0,1).join();
-            console.log(a);
-            if(this.hour < a){
-                el.style.color = '#252525';
-            }
-        });
-    }
-
-    getTimeNow(elem){
-        let el = document.querySelector(elem);
-
-
-
-
-
-        if( this.hour >= 8 && this.hour <= 23 ){
-            this.showTime(el);
-            setInterval(()=>{
-                this.showTime(el);
-            }, 60000) // обновление через каждую минуту
-        } else {
-            el.style.display = 'none';
-        }
-    }
-    static createTimeBox(){
-        let box = document.createElement('div');
-        box.className = 'time_box';
-        box.id = 'timeBox';
-        return box;
-    }
-}
-
-let timeNow = new SliderTimeNow();
-let timeSliderBox = document.querySelector("#timeSliderBox");
-
-
-timeSliderBox.appendChild( SliderTimeNow.createTimeBox() );
-timeNow.getTimeNow('#timeBox');
 
 
 
