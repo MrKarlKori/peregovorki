@@ -4,7 +4,8 @@
     border-radius: 4px;
     display: none;
     background: #FFFFFF;
-    box-shadow: 0 1px 8px 0 rgba(0,44,92,0.28);
+    -webkit-box-shadow: 0 1px 8px 0 rgba(0,44,92,0.28);
+            box-shadow: 0 1px 8px 0 rgba(0,44,92,0.28);
     border: 16px solid white;
     position: absolute;
     top: 40px;
@@ -42,9 +43,16 @@
 
 .calendar_data{
     width: 200px;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    flex-direction: row;
-    justify-content: center;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
     margin: 13px 0 15px;
 }
 .calendar_data button{
@@ -56,9 +64,16 @@
 }
 
 .calendar{
+    display:-webkit-box;
+    display:-ms-flexbox;
     display:flex;
-    flex-direction: row;
-    justify-content: center;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
 
 }
 .calendar table{
@@ -104,6 +119,8 @@
 
 .timeline__time{
     position: relative;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
     width: calc(100% - 245px);
 }
