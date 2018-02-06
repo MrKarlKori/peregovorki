@@ -282,7 +282,8 @@ footer {
 
 .timeline__calendar {
 	border-right: 1px rgba(0,0,0,0.1) solid;
-	width: 18%;
+	width: 245px;
+	position: relative;
 }
 
 .conf__rooms, .rooms, .room__name {

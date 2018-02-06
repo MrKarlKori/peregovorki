@@ -1,23 +1,33 @@
 .calendarNew{
     width: 604px;
-    padding: 16px;
     height: 232px;
     border-radius: 4px;
-    border: 1px solid gray;
     display: none;
+    background: #FFFFFF;
+    box-shadow: 0 1px 8px 0 rgba(0,44,92,0.28);
+    border: 16px solid white;
+    position: absolute;
+    top: 40px;
 }
 
 .data_now{
     width: 149px;
 }
 
+
 .data_now p{
     text-align: center;
-    color: #0070E0;
+    color: #000000;
     font-size: 16px;
     font-weight: bold;
     margin: 3px 0;
 }
+
+.data_now_active p {
+    color: #0070E0;
+}
+
+
 .show_none{
     display: block;
 }
@@ -52,13 +62,13 @@
 
 }
 .calendar table{
-    margin: 0 15px 30px;
+    margin: 15px 15px 30px;
 }
 
 .calendar table th,
 .calendar table td{
-   padding: 1px;
-   text-align: center;
+    padding: 1px;
+    text-align: center;
 }
 
 .calendar table td:hover{
@@ -80,7 +90,7 @@
     left: 0;
 }
 #preview .next__button{
-     right: 0;
+    right: 0;
 }
 #preview .prev__button:hover,
 #preview .next__button:hover{
@@ -88,4 +98,81 @@
     background: #E9ECEF;
     opacity: 1;
 }
-.calendarNew
+
+
+/*timeline*/
+
+.timeline__time{
+    position: relative;
+    display: flex;
+    width: calc(100% - 245px);
+}
+
+.timeline__hour {
+    text-align: center;
+    width: calc((100%)/16);
+    line-height: 50px;
+    font-size: 11px;
+    color: #858E98;
+    letter-spacing: 0.4px;
+    font-weight: bold;
+}
+
+.timeline__half{
+    float: left;
+    margin: 0;
+    width: 50%;
+    height: 100%;
+    line-height: 50px;
+}
+
+.timeline__busy{
+    background-color: #D5DFE9;
+}
+.timeline__free{
+    background-color: #FFFFFF;
+}
+.timeline__create{
+    background-color: #2B50FD;
+    border-radius: 2px;
+}
+
+.bargaining__box{
+    background-color: #F6F7F9;;
+}
+.time__value{
+    position: relative;
+}
+
+.time__value::before {
+    content: "";
+    position: absolute;
+    width: 2px;
+    height: 100vh;
+    background-color:  rgba(19,100,205,0.10);
+    left: calc((100% - 2px)/2);
+    top: 50px;
+}
+.time_box{
+    position: absolute;
+    width: 49px;
+    height: 20px;
+    text-align: center;
+    background-color: #007DFF;
+    border-radius: 100px;
+    font-size: 11px;
+    color: #FFFFFF;
+    letter-spacing: 0.4px;
+    top: 15px;
+    z-index: 1;
+    line-height: 22px;
+}
+.time_box:after{
+    content: '';
+    position: absolute;
+    width: 2px;
+    height: 100vh;
+    background-color:  #007DFF;
+    left: calc((100% - 2px)/2);
+    top: 20px;
+}

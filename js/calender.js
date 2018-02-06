@@ -43,8 +43,8 @@ calendarDataNextButton.addEventListener('click', ()=>{
 
 
 dataNow.addEventListener('click',()=>{
-
-    calendarNew.classList.toggle("show_none")
+    calendarNew.classList.toggle("show_none");
+    dataNow.classList.toggle("data_now_active");
 });
 
 fff.addEventListener('click', (ev)=>{
@@ -190,6 +190,62 @@ function createElementFunc (parentElId, nameElem, classNameEl, idNameEl) {
     newElement.id = idNameEl;
     return document.querySelector(parentElId).appendChild(newElement);
 }
+
+/*ползунок с текущим временем*/
+class SliderTimeNow {
+    constructor(){
+        this.date = new Date();
+        this.hour = this.date.getHours();
+        this.minute = this.date.getMinutes();
+    }
+
+    showTime(el){
+        this.date = new Date();
+        this.hour = this.date.getHours();
+        this.minute = this.date.getMinutes();
+        el.innerHTML = this.hour + ':' + this.minute;
+        let left = (this.hour * 60 + this.minute - 480) * 0.111;
+        el.style.display = 'block';
+        el.style.left = left + "%";
+    }
+
+    getTimeNow(elem){
+        let el = document.querySelector(elem);
+
+        let arrT = document.querySelectorAll('.timeline__hour');
+        [].forEach.call(arrT, (el)=>{
+           let a = el.textContent.split(':').splice(0,1).join();
+
+           if(this.hour < a){
+               el.style.color = '#252525';
+           }
+        });
+
+
+        if( this.hour >= 8 && this.hour <= 23 ){
+            this.showTime(el);
+            setInterval(()=>{
+                this.showTime(el);
+            }, 60000) // обновление через каждую минуту
+        } else {
+            el.style.display = 'none';
+        }
+    }
+    static createTimeBox(){
+        let box = document.createElement('div');
+        box.className = 'time_box';
+        box.id = 'timeBox';
+        return box;
+    }
+}
+
+let timeNow = new SliderTimeNow();
+let timeSliderBox = document.querySelector("#timeSliderBox");
+
+
+timeSliderBox.appendChild( SliderTimeNow.createTimeBox() );
+timeNow.getTimeNow('#timeBox');
+
 
 
 
