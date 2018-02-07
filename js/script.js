@@ -39,16 +39,12 @@ function createFirstTime(parent) {
 	div.style = 'height: 28px; display: inline-block; background-color: #D4DDE8; width: ' + time + 'px';
 	div.classList.add('added');
 
+	if(!parent) return;
 	if ( parent.children[0].classList.contains('added') ) {
 		parent.children[0].replaceWith(div);
 	} else {
 		parent.insertBefore(div, parent.children[0]);
 	}
-	/*if ( t === 'first' ) {
-		parent.insertBefore(div, parent.children[0]) || parent.appendChild(div);
-	} else {
-		parent.children[0].replaceWith(div);
-	}*/
 
 	parent.addEventListener('click', createMeetingInRoom);
 	parent.addEventListener('mouseover', hover);
@@ -57,7 +53,7 @@ function createFirstTime(parent) {
 
 function createBackground() {
 	let div = document.createElement('div');
-	div.style = 'position: absolute; height: 100%; width: 244px; border-right: 1px rgba(0,0,0,0.1) solid; top: 122px; background-color: #fff;';
+	div.style = 'position: absolute; bottom: 0; width: 244px; border-right: 1px rgba(0,0,0,0.1) solid; top: 122px; background-color: #fff;';
 	document.querySelector('.conf-rooms').appendChild(div);
 }
 
@@ -99,6 +95,7 @@ function hover(e) {
 }
 
 function hoverOut(e) {
+  if(!e) return;
 	if ( e.toElement.className === 'button__plus' ) {
 		return;
 	}

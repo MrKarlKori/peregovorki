@@ -47,7 +47,7 @@ class SliderTimeNow {
     }
     getTimeNow(elem){
         let el = document.querySelector(elem);
-        if( this.hour >= 8 && this.hour <= 23 ){
+        if( this.hour > 8 && this.hour < 23 ){
             this.showTime(el);
 
             setInterval(()=>{

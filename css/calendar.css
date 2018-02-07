@@ -9,6 +9,7 @@
     border: 16px solid white;
     position: absolute;
     top: 40px;
+    left: 25px;
     z-index: 10;
 }
 
@@ -54,7 +55,7 @@
     -webkit-box-pack: center;
         -ms-flex-pack: center;
             justify-content: center;
-    margin: 13px 0 15px;
+    margin: 13px 0 15px 25px
     cursor: pointer;
 }
 .calendar_data button {
@@ -169,7 +170,7 @@
     content: "";
     position: absolute;
     width: 2px;
-    height: 100vh;
+    height: calc(100vh - 52px - 70px);
     background-color:  rgba(19,100,205,0.10);
     left: calc((100% - 2px)/2);
     top: 50px;
@@ -192,7 +193,7 @@
     content: '';
     position: absolute;
     width: 2px;
-    height: 100vh;
+    height: calc(100vh - 37px - 70px);
     background-color:  #007DFF;
     left: calc((100% - 2px)/2);
     top: 20px;
