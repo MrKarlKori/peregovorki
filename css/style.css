@@ -403,9 +403,15 @@ footer {
 	cursor: pointer;
 }
 
-.t{
+.t {
 	position: absolute;
 	height: 28px;
 	width: calc(100% - 245px);
 	display: flex;
+}
+
+
+.timeline__busy:hover {
+	background-color: #93a4b5;
+	cursor: pointer;
 }
