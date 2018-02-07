@@ -9,7 +9,11 @@ buttonDefault.addEventListener('click', ()=>{
 });
 
 deleteMeetButton.addEventListener('click', ()=>{
-    openMain()
+    openMain();
+});
+
+document.querySelector('.form-body-right').children[0].addEventListener('click', () => {
+    openMain();
 });
 
 const minute = a.clientWidth / 960;
