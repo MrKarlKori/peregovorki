@@ -1,6 +1,7 @@
 let a = document.querySelector(".room__time");
 let buttonDefault = document.querySelector(".create_meet_button");
 let deleteMeetButton = document.querySelector(".delete_meet_button");
+let blueName = null;
 
 buttonDefault.addEventListener('click', ()=>{
     openMain();
@@ -17,13 +18,13 @@ let room = [];
 
 window.onload = function() {
 	createPlusButtons();
-    addBluButton();
+    addBlueButton();
 	createFirstTimes();
 
 	createBackground();
 };
 
-let timer = setInterval(createFirstTimes, 20000);
+let timer = setInterval(createFirstTimes, 1000);
 
 function createFirstTimes() {
 	let divs = document.querySelectorAll('.room__time');
@@ -67,7 +68,7 @@ function createPlusButtons() {
 
 }
 
-function addBluButton() {
+function addBlueButton() {
     let divs = document.querySelectorAll('.timeline__free');
     for ( let i = 0; i < divs.length; i++ ) {
         divs[i].innerHTML = '<button class="button__plus" onclick="createMeeting()"> + </button>';
@@ -103,18 +104,19 @@ function hover(e) {
 		return;
 	}
 	e.toElement.children[0].style.display = 'block';
+  blueName = e.target.parentNode.children[0];
+	blueName.style.color = 'rgba(0,124,255,1)';
 }
 
 function hoverOut(e) {
-
-  if(!e) return;
-	if ( e.toElement.className === 'button__plus' ) {
-		return;
-	}
+  if ( !e || e.toElement.className === 'button__plus' ) return;
+  
 	if ( e.fromElement.tagName === 'BUTTON' ) {
 		e.fromElement.style.display = 'none';
+    blueName.style.color = 'black';
 	} else if ( e.target.className === 'timeline__hour timeline__free' ) {
 		e.fromElement.children[0].style.display = 'none';
+    blueName.style.color = 'black';
 	}
 }
 
@@ -137,7 +139,7 @@ function createDiv(n) {
 
 function getMinutes() {
 	let date = new Date();
-	return date.getHours() * 60 + date.getMinutes() - 444;
+	return date.getHours() * 60 + date.getMinutes() - 445;
 }
 
 
