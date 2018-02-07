@@ -23,27 +23,27 @@ window.onload = function() {
 	createBackground();
 };
 
-let timer = setInterval(createFirstTime, 30000);
+let timer = setInterval(createFirstTimes, 20000);
 
 function createFirstTimes() {
 	let divs = document.querySelectorAll('.room__time');
 
 	for ( let i = 0; i < divs.length; i++ ) {
-		createFirstTime(divs[i], 'first');
+		createFirstTime(divs[i]);
 	}
 }
 
-function createFirstTime(parent, t) {
+function createFirstTime(parent) {
 	let div = document.createElement("div");
 	time = minute * getMinutes();
 	div.style = 'height: 28px; display: inline-block; background-color: #D4DDE8; width: ' + time + 'px';
+	div.classList.add('added');
 
 	if(!parent) return;
-
-	if ( t === 'first' ) {
-		parent.insertBefore(div, parent.children[0]) || parent.appendChild(div);
-	} else if ( parent.children[0] ) {
+	if ( parent.children[0].classList.contains('added') ) {
 		parent.children[0].replaceWith(div);
+	} else {
+		parent.insertBefore(div, parent.children[0]);
 	}
 
 	parent.addEventListener('click', createMeetingInRoom);
@@ -60,7 +60,8 @@ function createBackground() {
 function createPlusButtons() {
 	let divs = document.querySelectorAll('.room__time');
 	for ( let i = 0; i < divs.length; i++ ) {
-		divs[i].innerHTML = '<button class="button__plus" onclick="createMeeting()" onmouseout="hoverOut()">+</button>';
+		divs[i].innerHTML = '<button class="button__plus" onclick="createMeeting()">+</button>';
+		divs[i].children[0].addEventListener('mouseout', hoverOut);
 	}
 }
 
@@ -94,15 +95,15 @@ function hover(e) {
 }
 
 function hoverOut(e) {
-    if(!e) return;
-
-	if ( e.toElement.tagName === 'BUTTON' ) {
+  if(!e) return;
+	if ( e.toElement.className === 'button__plus' ) {
 		return;
 	}
 	if ( e.fromElement.tagName === 'BUTTON' ) {
 		e.fromElement.style.display = 'none';
+	} else if ( e.target.className === 'room__time' ) {
+		e.fromElement.children[1].style.display = 'none';
 	}
-
 }
 
 function checkFreeTime(e) {
@@ -121,7 +122,7 @@ function createDiv(n) {
 
 function getMinutes() {
 	let date = new Date();
-	return date.getHours() * 60 + date.getMinutes() - 445;
+	return date.getHours() * 60 + date.getMinutes() - 444;
 }
 
 

@@ -56,14 +56,16 @@
         -ms-flex-pack: center;
             justify-content: center;
     margin: 13px 0 15px 25px
-
+    cursor: pointer;
 }
-.calendar_data button{
+.calendar_data button {
     width: 24px;
     height: 24px;
     border: none;
     border-radius: 12px;
     background-color: #E9ECEF;
+    color: rgba(0,0,0,0.5);
+    cursor: pointer;
 }
 
 .calendar{
@@ -77,8 +79,8 @@
     -webkit-box-pack: center;
         -ms-flex-pack: center;
             justify-content: center;
-
 }
+
 .calendar table{
     margin: 15px 15px 30px;
 }
