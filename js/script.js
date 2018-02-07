@@ -17,7 +17,7 @@ let room = [];
 
 window.onload = function() {
 	createPlusButtons();
-
+    addBluButton();
 	createFirstTimes();
 
 	createBackground();
@@ -36,7 +36,7 @@ function createFirstTimes() {
 function createFirstTime(parent) {
 	let div = document.createElement("div");
 	time = minute * getMinutes();
-	div.style = 'height: 28px; display: inline-block; background-color: #D4DDE8; width: ' + time + 'px';
+	div.style = 'height: 28px; z-index: 2; display: inline-block; background-color: #D4DDE8; width: ' + time + 'px';
 	div.classList.add('added');
 
 	if(!parent) return;
@@ -45,10 +45,6 @@ function createFirstTime(parent) {
 	} else {
 		parent.insertBefore(div, parent.children[0]);
 	}
-
-	parent.addEventListener('click', createMeetingInRoom);
-	parent.addEventListener('mouseover', hover);
-	parent.addEventListener('mouseout', hoverOut);
 }
 
 function createBackground() {
@@ -60,10 +56,26 @@ function createBackground() {
 function createPlusButtons() {
 	let divs = document.querySelectorAll('.room__time');
 	for ( let i = 0; i < divs.length; i++ ) {
-		divs[i].innerHTML = '<button class="button__plus" onclick="createMeeting()">+</button>';
+		divs[i].innerHTML = createBlockWhithMeet();
 		divs[i].children[0].addEventListener('mouseout', hoverOut);
+
+
+        divs[i].addEventListener('click', createMeetingInRoom);
+        divs[i].addEventListener('mouseover', hover);
+        divs[i].addEventListener('mouseout', hoverOut);
 	}
+
 }
+
+function addBluButton() {
+    let divs = document.querySelectorAll('.timeline__free');
+    for ( let i = 0; i < divs.length; i++ ) {
+        divs[i].innerHTML = '<button class="button__plus" onclick="createMeeting()"> + </button>';
+        divs[i].children[0].addEventListener('mouseout', hoverOut);
+    }
+}
+
+
 
 function createMeeting(e) {
 	document.querySelector('.main').style.display = 'none';
@@ -83,7 +95,6 @@ function createMeetingInRoom(e) {
 	if ( checkFreeTime(e) ) {
 		return;
 	}
-	
 	createMeeting();
 }
 
@@ -91,32 +102,36 @@ function hover(e) {
 	if ( checkFreeTime(e) ) {
 		return;
 	}
-	e.toElement.children[1].style.display = 'block';
+	e.toElement.children[0].style.display = 'block';
 }
 
 function hoverOut(e) {
+
   if(!e) return;
 	if ( e.toElement.className === 'button__plus' ) {
 		return;
 	}
 	if ( e.fromElement.tagName === 'BUTTON' ) {
 		e.fromElement.style.display = 'none';
-	} else if ( e.target.className === 'room__time' ) {
-		e.fromElement.children[1].style.display = 'none';
+	} else if ( e.target.className === 'timeline__hour timeline__free' ) {
+		e.fromElement.children[0].style.display = 'none';
 	}
 }
 
 function checkFreeTime(e) {
-	if ( e.target.className === 'room__time' ) return false;
+	if ( e.target.className === 'timeline__hour timeline__free' ) return false;
 	return true;
 }
+
+
+
+
 
 function createDiv(n) {
 	let div = document.createElement("div");
 	n === 'first' ? time = minute * getMinutes() : time = minute * 30;
 	div.style = 'height: 28px; display: inline-block; background-color: gray; width: ' + time + 'px';
 	div.textContent = Math.round(time);
-
 	return div;
 }
 
@@ -186,4 +201,58 @@ function deleteMeet(element) {
         document.body.removeChild(element);
         document.body.removeChild(b);
     });
+}
+
+function createBlockWhithMeet() {
+	return `<div class="t">
+				<div class="timeline__hour timeline__free">
+					
+				</div>
+				<div class="timeline__hour timeline__free">
+					
+				</div>
+				<div class="timeline__hour timeline__free">
+					
+				</div>
+				<div class="timeline__hour timeline__free">
+					
+				</div>
+				<div class="timeline__hour timeline__busy">
+					
+				</div>
+				<div class="timeline__hour timeline__busy">
+					
+				</div>
+				<div class="timeline__hour timeline__free">
+
+				</div>
+				<div class="timeline__hour timeline__free">
+
+				</div>
+				<div class="timeline__hour timeline__busy">
+
+				</div>
+				<div class="timeline__hour timeline__busy">
+
+				</div>
+				<div class="timeline__hour timeline__busy">
+
+				</div>
+				<div class="timeline__hour timeline__free">
+
+				</div>
+				<div class="timeline__hour timeline__free">
+
+				</div>
+				<div class="timeline__hour timeline__free">
+
+				</div>
+				<div class="timeline__hour timeline__free">
+
+				</div>
+				<div class="timeline__hour timeline__free">
+
+				</div>
+			</div>
+`
 }
