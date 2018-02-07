@@ -104,7 +104,13 @@ function hover(e) {
 		return;
 	}
 	e.toElement.children[0].style.display = 'block';
-  blueName = e.target.parentNode.children[0];
+
+	if ( e.relatedTarget.className === 'floor__room' ) {
+		blueName = e.relatedTarget.children[0];
+	} else {
+		blueName = e.path[3].children[0];
+	}
+
 	blueName.style.color = 'rgba(0,124,255,1)';
 }
 
@@ -113,10 +119,10 @@ function hoverOut(e) {
   
 	if ( e.fromElement.tagName === 'BUTTON' ) {
 		e.fromElement.style.display = 'none';
-    blueName.style.color = 'black';
+    	blueName.style.color = 'black';
 	} else if ( e.target.className === 'timeline__hour timeline__free' ) {
 		e.fromElement.children[0].style.display = 'none';
-    blueName.style.color = 'black';
+    	blueName.style.color = 'black';
 	}
 }
 
