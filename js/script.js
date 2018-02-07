@@ -1,6 +1,7 @@
 let a = document.querySelector(".room__time");
 let buttonDefault = document.querySelector(".create_meet_button");
 let deleteMeetButton = document.querySelector(".delete_meet_button");
+let blueName = null;
 
 buttonDefault.addEventListener('click', ()=>{
     openMain();
@@ -23,7 +24,7 @@ window.onload = function() {
 	createBackground();
 };
 
-let timer = setInterval(createFirstTimes, 10000);
+let timer = setInterval(createFirstTimes, 1000);
 
 function createFirstTimes() {
 	let divs = document.querySelectorAll('.room__time');
@@ -92,17 +93,21 @@ function hover(e) {
 		return;
 	}
 	e.toElement.children[1].style.display = 'block';
+	blueName = e.target.parentNode.children[0];
+	blueName.style.color = 'rgba(0,124,255,1)';
 }
 
 function hoverOut(e) {
-  if(!e) return;
+  	if(!e) return;
 	if ( e.toElement.className === 'button__plus' ) {
 		return;
 	}
 	if ( e.fromElement.tagName === 'BUTTON' ) {
 		e.fromElement.style.display = 'none';
+		blueName.style.color = 'black'
 	} else if ( e.target.className === 'room__time' ) {
 		e.fromElement.children[1].style.display = 'none';
+		blueName.style.color = 'black'
 	}
 }
 
