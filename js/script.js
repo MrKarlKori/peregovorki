@@ -23,7 +23,7 @@ window.onload = function() {
 	createBackground();
 };
 
-let timer = setInterval(createFirstTimes, 20000);
+let timer = setInterval(createFirstTimes, 10000);
 
 function createFirstTimes() {
 	let divs = document.querySelectorAll('.room__time');
@@ -122,7 +122,7 @@ function createDiv(n) {
 
 function getMinutes() {
 	let date = new Date();
-	return date.getHours() * 60 + date.getMinutes() - 444;
+	return date.getHours() * 60 + date.getMinutes() - 445;
 }
 
 
