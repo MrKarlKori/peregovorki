@@ -26,7 +26,19 @@ window.onload = function() {
 	createFirstTimes();
 
 	createBackground();
+
+	addEventListenersToBusyBlocks();
 };
+
+function addEventListenersToBusyBlocks(e) {
+	let blocks = document.querySelectorAll('.timeline__busy');
+
+	if ( !blocks ) return;
+
+	for ( let item of blocks ) {
+		item.addEventListener('click', editMeeting);
+	}
+}
 
 let timer = setInterval(createFirstTimes, 1000);
 
@@ -85,15 +97,24 @@ function addBlueButton() {
 function createMeeting(e) {
 	document.querySelector('.main').style.display = 'none';
 	document.querySelector('.button').style.display = 'none';
-	document.querySelector('.meeting').style.display = 'block';
-	document.querySelector('footer').style.display = 'flex';
+	document.querySelector('.meeting__new').style.display = 'block';
+	document.querySelector('.footer__new').style.display = 'flex';
+}
+
+function editMeeting(e) {
+	document.querySelector('.main').style.display = 'none';
+	document.querySelector('.button').style.display = 'none';
+	document.querySelector('.meeting__edit').style.display = 'block';
+	document.querySelector('.footer__edit').style.display = 'flex';
 }
 
 function openMain(e) {
 	document.querySelector('.main').style.display = 'block';
 	document.querySelector('.button').style.display = 'block';
-	document.querySelector('.meeting').style.display = 'none';
-	document.querySelector('footer').style.display = 'none';
+	document.querySelector('.meeting__new').style.display = 'none';
+	document.querySelector('.meeting__edit').style.display = 'none';
+	document.querySelector('.footer__new').style.display = 'none';
+	document.querySelector('.footer__edit').style.display = 'none';
 }
 
 function createMeetingInRoom(e) {
