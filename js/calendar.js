@@ -175,8 +175,8 @@ function Calender ( {el} ) {
     let butPrev = createElementFunc ( el, 'button', 'prev__button', el + 'prev_button');
     let butNext = createElementFunc ( el, 'button', 'next__button', el + 'next_button');
 
-    butPrev.innerHTML = '<';
-    butNext.innerHTML = '>';
+    butPrev.innerHTML = '<i class="fas fa-angle-left">';
+    butNext.innerHTML = '<i class="fas fa-angle-right">';
 
     /*отрисовка календаря*/
     CreateCalendar ( el + 'calendar' , year, month, el);

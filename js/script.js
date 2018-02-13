@@ -12,10 +12,6 @@ deleteMeetButton.addEventListener('click', ()=>{
     openMain();
 });
 
-document.querySelector('.form-body-right').children[0].addEventListener('click', () => {
-    openMain();
-});
-
 const minute = a.clientWidth / 960;
 
 let room = [];
@@ -28,6 +24,8 @@ window.onload = function() {
 	createBackground();
 
 	addEventListenersToBusyBlocks();
+	addEventListenersToXButtons();
+	roomDefaultClicked();
 };
 
 function addEventListenersToBusyBlocks(e) {
@@ -37,6 +35,59 @@ function addEventListenersToBusyBlocks(e) {
 
 	for ( let item of blocks ) {
 		item.addEventListener('click', editMeeting);
+	}
+}
+
+function addEventListenersToXButtons(e) {
+	let button = document.querySelectorAll('.close');
+
+	for ( let item of button) {
+		item.addEventListener('click', () => {
+			openMain();
+		});
+	}
+}
+
+function roomDefaultClicked() {
+	let rooms = document.querySelectorAll('.recommended-room--default');
+
+	for ( let item of rooms ) {
+		item.addEventListener('click', (e) => {
+			if ( e.target.classList.contains('recommended-room__close') ) return;
+			if ( e.target.classList.contains('recommended-room--default') ) {
+				e = e.target;
+			} else {
+				e = e.target.parentElement;
+			}
+
+			if ( e.classList.contains('recommended-room--default') ) {
+				e.classList.remove('recommended-room--default');
+				e.classList.add('recommended-room--clicked');
+				hideRooms();
+				e.children[2].addEventListener('click', () => {
+					showRooms(e);
+				});
+			}
+
+			function hideRooms() {
+				for ( let item of rooms ) {
+					if ( item.classList.contains('recommended-room--clicked') ) continue;
+
+					item.style.display = 'none';
+				}
+			}
+
+			function showRooms(e) {
+				for ( let item of rooms ) {
+					item.style.display = 'flex';
+
+					if ( item.classList.contains('recommended-room--clicked') ) {
+						item.classList.add('recommended-room--default');
+						item.classList.remove('recommended-room--clicked');
+					}
+				}
+			}
+		});
 	}
 }
 
