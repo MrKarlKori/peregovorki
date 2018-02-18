@@ -70,7 +70,7 @@ header p::first-letter {
 	margin: 50px 16%;
 }
 
-footer {
+.footer__new, .footer__edit {
 	border-top: 1px rgba(0,0,0,0.1) solid;
 	display: -webkit-box;
 	display: -ms-flexbox;

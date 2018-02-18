@@ -205,14 +205,15 @@
 			</div>
 
 		</form>
+		<div class="footer__new" style="display: none">
+			<div class="form-buttons">
+				<button class="button button__default delete_meet_button">Отмена</button>
+				<button class="button button__create create_meet_button">Создать встречу</button>
+			</div>
+		</div>
 	</main>
 
-	<footer class="footer__new" style="display: none">
-		<div class="form-buttons">
-			<button class="button button__default delete_meet_button">Отмена</button>
-			<button class="button button__create create_meet_button">Создать встречу</button>
-		</div>
-	</footer>
+
 
 	<main class="meeting meeting__edit" style="display: none">
 		<form action="" class="form">
@@ -261,15 +262,14 @@
 			</div>
 		  </div>
 		</form>
-	</main>
-
-	<footer class="footer__edit" style="display: none;">
-		<div class="form-buttons">
-			<button class="button button__default" onclick="openMain()">Отмена</button>
-			<button class="button button__default" onclick="openMain()">Удалить встречу</button>
-			<button class="button button__default" onclick="openMain()">Сохранить</button>
+		<div class="footer__edit" style="display: none;">
+			<div class="form-buttons">
+				<button class="button button__default" onclick="openMain()">Отмена</button>
+				<button class="button button__default" onclick="openMain()">Удалить встречу</button>
+				<button class="button button__default" onclick="openMain()">Сохранить</button>
+			</div>
 		</div>
-	</footer>
+	</main>
 
 <script src="js/delete.js"></script>
 <script src="js/calendar.js"></script>
