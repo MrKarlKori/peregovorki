@@ -42,8 +42,8 @@ type Event {
 
 input EventInput {
     title: String!
-    dateStart: Date
-    dateEnd: Date
+    dateStart: Date!
+    dateEnd: Date!
 }
 
 type Query {

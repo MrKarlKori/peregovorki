@@ -68,7 +68,7 @@ function addEvent() {
 }
 
 function getEvents() {
- fetch(`http://localhost:3000/graphql?query={events%20{id, title, users{id}, room{id}}}`,
+ fetch(`http://localhost:3000/graphql?query={events%20{id, title, users{id}, room{id}, dateStart, dateEnd}}`,
  {
  method: 'post'
  }).then(function(response) {
