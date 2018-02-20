@@ -1,3 +1,4 @@
+getRooms();
 
 function getUsers() {
  fetch('http://localhost:3000/graphql?query={users%20{id}}')
@@ -5,8 +6,8 @@ function getUsers() {
  console.log(response);
  return response.json();
  })
- .then((response)=> console.log(response) )
- .catch( alert );
+ .then((response)=> console.log(response))
+ .catch( alert )
 }
 
 function getRooms() {
@@ -15,7 +16,7 @@ function getRooms() {
  console.log(response);
  return response.json();
  })
- .then((response)=> console.log(response) )
+ .then((response)=> eventBus.trigger('отрисовать комнаты', response ) )
  .catch( alert );
 }
 

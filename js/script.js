@@ -286,6 +286,7 @@ function deleteMeet(element) {
         document.body.removeChild(b);
     });
 }
+/*
 
 function createBlockWhithMeet() {
 	return `<div class="t">
@@ -340,3 +341,4 @@ function createBlockWhithMeet() {
 			</div>
 `
 }
+*/
