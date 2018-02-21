@@ -20,9 +20,7 @@ window.onload = function() {
 	createPlusButtons();
     addBlueButton();
 	createFirstTimes();
-
 	createBackground();
-
 	addEventListenersToBusyBlocks();
 	addEventListenersToXButtons();
 	roomDefaultClicked();

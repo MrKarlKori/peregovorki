@@ -1,11 +1,12 @@
 let floorsInPage = new Set();
 let parent = document.querySelector('.conf-rooms');
-let eventBus = new EventBus();
+
 
 eventBus.on('отрисовать комнаты',(roomT)=>{
-    console.log(roomT);
-    let r = roomT.data.rooms;
-    r.forEach( el => {
+
+    let arrWitsRooms = roomT.data.rooms;
+
+    arrWitsRooms.forEach( el => {
         floorsInPage.add(el.floor);
     });
 
@@ -16,8 +17,7 @@ eventBus.on('отрисовать комнаты',(roomT)=>{
     let floors = document.querySelectorAll('.floor');
 
     [].forEach.call(floors, floor => {
-        r.forEach( room => {
-
+        arrWitsRooms.forEach( room => {
             if( +floor.innerText.slice(0,1) === room.floor ){
                 showRoom(room.title, room.capacity, floor );
             }
@@ -36,7 +36,6 @@ function showFloor(florName, parent) {
     `;
     parent.appendChild(div);
 }
-
 function showRoom(roomName, capacity, parent ) {
     let div = document.createElement('div');
     div.innerHTML = `
@@ -55,49 +54,49 @@ function showRoom(roomName, capacity, parent ) {
     parent.appendChild(div);
 }
 
-
+/*псевдомассив со встречами*/
 let eventS = [
     {
-        dateEnd: 12,
-        dateStart: 8,
+        dateEnd: "2018-02-22T10:12:36.981Z",
+        dateStart: "2018-02-22T09:12:36.981Z",
         id: "1",
         room: 'Деньги',
         title: "ШРИ 2018 - начало",
         users: null
     },
     {
-        dateEnd: 23,
-        dateStart: 20,
+        dateEnd: "2018-03-01T14:12:36.981Z",
+        dateStart: "2018-03-01T13:12:36.981Z",
         id: "1",
         room: 'Деньги',
         title: "ШРИ 2018 - начало",
         users: null
     },{
 
-        dateEnd: 16,
-        dateStart: 12,
+        dateEnd: "2018-02-22T12:12:36.981Z",
+        dateStart: "2018-02-22T10:08:36.981Z",
         id: "2",
         room: 'Карты',
         title: "👾 Хакатон 👾",
         users: null
     },{
 
-        dateEnd: 24,
-        dateStart: 18,
+        dateEnd: "2018-01-13T22:12:36.981Z",
+        dateStart: "2018-01-13T18:19:36.981Z",
         id: "2",
         room: 'Карты',
         title: "👾 Хакатон 👾",
         users: null
     },{
-        dateEnd: 20,
-        dateStart: 16,
+        dateEnd: "2018-02-23T12:12:36.981Z",
+        dateStart: "2018-02-23T08:12:36.981Z",
         id: "3",
         room: 'Ствола',
         title: "🍨 Пробуем kefir.js",
         users: null
     },{
-        dateEnd: 11,
-        dateStart: 8,
+        dateEnd: "2018-02-21T22:12:36.981Z",
+        dateStart: "2018-02-21T19:15:36.981Z",
         id: "3",
         room: 'Ствола',
         title: "🍨 Пробуем kefir.js",
@@ -108,23 +107,43 @@ let eventS = [
 eventBus.on('отрисовать встречи',()=>{
     let rooms = document.querySelectorAll('.room-name__person');
     [].forEach.call(rooms, roomName => {
+
         var newArr = [];
 
         eventS.forEach(eventS => {
+            let clone = {};
+
+            for (let key in eventS) {
+                clone[key] = eventS[key];
+            }
+
             if(roomName.innerText === eventS.room){
-                newArr.push(eventS);
+                if( JSON.stringify( getTransformDataForCalender(eventS.dateStart)) ===  JSON.stringify( [dataInCal.data.getFullYear(), dataInCal.data.getMonth(), dataInCal.data.getDate()])){
+                    newArr.push(clone);
+                }
             }
         });
+
         let parent = roomName.parentNode.parentNode.querySelector('.room__time');
-        b(newArr, parent);
+        showEventsInFloor(newArr, parent);
         newArr = [];
 
     });
 });
 
+function getTransformDataForCalender(date) {
+    let param = new Date(date);
+    let differenceTimeZone = param.getHours() + param.getTimezoneOffset()/60;
+    let newDate = new Date (param.getFullYear(), param.getMonth(), param.getDate(), differenceTimeZone);
+    return [newDate.getFullYear(), newDate.getMonth(), newDate.getDate()]
+}
 
-
-
+function getDateTransform(date) {
+    let param = new Date(date);
+    let differenceTimeZone = param.getHours() + param.getTimezoneOffset()/60;
+    let newDate = new Date (param.getFullYear(), param.getMonth(), param.getDate(), differenceTimeZone);
+    return newDate.getHours()
+}
 function showEvent(elem, className, width, left){
     let el = document.createElement('div');
     el.className = className;
@@ -132,33 +151,39 @@ function showEvent(elem, className, width, left){
     el.style.left = Math.round( left * 100 ) / 100  + '%';
     return elem.appendChild(el)
 }
-
-function b(arr, elem) {
+function showEventsInFloor(arr, elem) {
     let COEFFICIENT = 6.6666666667; //из пропорции 100% - ((100%/16)/2) - 900min ; x% - 1min
+    let STARTHOUR = 8;
+    let ENDHOUR = 23;
 
     if( arr.length === 0){
-        a('timeline__free',  23  * COEFFICIENT,  8  * COEFFICIENT);
+        a('timeline__free',  ENDHOUR * COEFFICIENT,  STARTHOUR  * COEFFICIENT);
         return;
     }
 
     arr.forEach((el,i)=>{
-        let left = ( el.dateStart - 8) * COEFFICIENT;
+
+        el.dateStart = getDateTransform(arr[i].dateStart);
+        el.dateEnd = getDateTransform(arr[i].dateEnd);
+
+
+        let left = ( el.dateStart - STARTHOUR) * COEFFICIENT;
         let width =  ( el.dateEnd - el.dateStart ) * COEFFICIENT;
 
         if( arr[i - 1] === undefined && arr[i + 1] === undefined){
-            if( 8  - el.dateStart < 0){
-                a('timeline__free', ( el.dateStart - 8 ) * COEFFICIENT , 0)
+            if( STARTHOUR  - el.dateStart < 0){
+                a('timeline__free', ( el.dateStart - STARTHOUR ) * COEFFICIENT , 0)
             }
             a('timeline__busy', width, left);
-            if( el.dateEnd < 23){
-                a('timeline__free', ( 23 - el.dateEnd ) * COEFFICIENT, ( el.dateEnd - 8 ) * COEFFICIENT)
+            if( el.dateEnd < ENDHOUR){
+                a('timeline__free', ( ENDHOUR - el.dateEnd ) * COEFFICIENT, ( el.dateEnd - STARTHOUR ) * COEFFICIENT)
             }
             return
         }
 
         if( arr[i - 1] === undefined ){
-            if( 8  - el.dateStart < 0){
-                a('timeline__free', ( el.dateStart - 8 ) * COEFFICIENT , 0)
+            if( STARTHOUR  - el.dateStart < 0){
+                a('timeline__free', ( el.dateStart - STARTHOUR ) * COEFFICIENT , 0)
             }
             a('timeline__busy', width, left);
             return
@@ -166,14 +191,14 @@ function b(arr, elem) {
 
         if( arr[i - 1].dateEnd ){
             if( arr[i - 1].dateEnd  - el.dateStart < 0){
-                a('timeline__free', ( el.dateStart - arr[i - 1].dateEnd ) * COEFFICIENT, (arr[i - 1].dateEnd - 8) * COEFFICIENT )
+                a('timeline__free', ( el.dateStart - arr[i - 1].dateEnd ) * COEFFICIENT, (arr[i - 1].dateEnd - STARTHOUR) * COEFFICIENT )
             }
             a('timeline__busy', width, left);
         }
 
         if( arr[i + 1] === undefined ){
-            if( el.dateEnd < 23){
-                a('timeline__free', ( 23 - el.dateEnd ) * COEFFICIENT, ( el.dateEnd - 8 ) * COEFFICIENT)
+            if( el.dateEnd < ENDHOUR){
+                a('timeline__free', ( ENDHOUR - el.dateEnd ) * COEFFICIENT, ( el.dateEnd - STARTHOUR ) * COEFFICIENT)
             }
         }
     });
@@ -183,8 +208,7 @@ function b(arr, elem) {
     }
 }
 
-
-/**/
+/*обработчики на странице*/
 let classNameBusyBox = 'timeline__busy';
 let classNameFreeBox = 'timeline__free';
 let classNameBlueButtonWithPlus = 'button__plus';
@@ -192,9 +216,6 @@ let classNameBlueButtonCreateMeet = 'meeting meeting__new';
 let classNameDeleteButtonCreateMeet = 'button button__default delete_meet_button';
 let mainPage = document.querySelector('.main');
 let footerNew = document.querySelector('.footer__new');
-
-
-
 
 //обработчик mouseover
 document.body.addEventListener('mouseover', (ev)=>{
@@ -215,14 +236,12 @@ document.body.addEventListener('click', (ev)=>{
     let target = ev.target;
 
     if(target.className === classNameBlueButtonWithPlus) {
+
         let pageCreateMeet = document.querySelector('.meeting__new');
-        console.log(pageCreateMeet);
+
         if( pageCreateMeet.style.display = 'none'){
             pageCreateMeet.style.display = 'block';
             footerNew.style.display = 'block';
-
-
-
             mainPage.style.display = 'none';
         }
 
@@ -232,7 +251,9 @@ document.body.addEventListener('click', (ev)=>{
     }
 
     if( target.className === classNameBusyBox) {
+
         let changeMeetPage = document.querySelector('.change_meet_page');
+
         if( changeMeetPage.classList.contains('none_show')){
             changeMeetPage.classList.remove('none_show');
         }
@@ -250,9 +271,11 @@ document.body.addEventListener('click', (ev)=>{
 //создание голубой кнопки на свободной зоне
 function createBluButton (elem) {
     let delBut = document.querySelectorAll('.button__plus');
+
     [].forEach.call(delBut, (el)=>{
         el.parentNode.removeChild(el);
     });
+
     elem.innerHTML = '<button class="button__plus" style="display: block"> + </button>';
 }
 

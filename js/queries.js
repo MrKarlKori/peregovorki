@@ -1,5 +1,3 @@
-getRooms();
-
 function getUsers() {
  fetch('http://localhost:3000/graphql?query={users%20{id}}')
  .then(function(response) {
