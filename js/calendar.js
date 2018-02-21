@@ -144,6 +144,12 @@ function dateShow(year,month,day) {
         timeSliderBox.appendChild( SliderTimeNow.createTimeBox() );
         timeNow.getTimeNow('#timeBox');
     }
+
+    let f = document.querySelector('.conf-rooms');
+    while (f.children.length > 0){
+        f.removeChild(f.children[0])
+    }
+    getRooms();
 }
 
 //функция отображения календаря

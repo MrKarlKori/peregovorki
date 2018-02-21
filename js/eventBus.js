@@ -59,3 +59,4 @@ EventBus.prototype.once = function(eventName, cb) {
     }
     this.on(eventName, addOnceCallback);
 };
+let eventBus = new EventBus();
